@@ -1,1 +1,84 @@
+SmartSDLC Pro – In-Depth Requirements & Environment Setup
+This document explains all the required dependencies for running the SmartSDLC Pro project—an AI-driven software development suite built using Gradio, PyTorch, and the IBM Granite LLM.
+
+✅ Core Dependencies
+1. gradio
+Version: gradio==4.25.0
+
+Purpose: Powers the entire web-based UI with tabs, dropdowns, file upload buttons, and interactive code/text displays.
+
+Used In: gr.Blocks, gr.Tab, gr.File, gr.Textbox, gr.Button, gr.JSON, gr.Code, etc.
+
+Why Required:
+
+Provides the user interface for uploading PDFs, viewing generated code, and interacting with the AI assistant.
+
+Used to build a professional UI with themes and layouts.
+
+2. transformers
+Version: transformers==4.40.1
+
+Purpose: Loads and communicates with pre-trained language models such as ibm-granite/granite-3.3-2b-instruct from Hugging Face.
+
+Used In: AutoTokenizer.from_pretrained(), AutoModelForCausalLM.from_pretrained(), .generate()
+
+Why Required:
+
+You use IBM's Granite LLM, which is hosted on Hugging Face. The transformers library is essential to download and interact with it using a standardized interface.
+
+Enables tokenization, prompt feeding, and response decoding.
+
+3. torch
+Version: torch==2.3.0
+
+Purpose: Provides GPU/CPU inference support for large language models.
+
+Used In: Sending model to device (cuda/cpu), inference with @torch.inference_mode(), and tensor operations.
+
+Why Required:
+
+All model computations are done using PyTorch.
+
+Supports GPU acceleration if CUDA is available, improving performance.
+
+4. PyPDF2
+Version: PyPDF2==3.0.1
+
+Purpose: Extracts readable text from uploaded .pdf files for requirement analysis.
+
+Used In: PdfReader, .pages, .extract_text()
+
+Why Required:
+
+Lets you upload PDF software requirements and convert them to text for further LLM processing.
+
+Temporary files are created to handle file streams for analysis.
+
+🔄 Optional but Helpful Dependencies
+5. tokenizers
+Version: tokenizers==0.19.1
+
+Purpose: Low-level tokenizer optimization used internally by transformers.
+
+Why Recommended:
+
+Ensures compatibility with all tokenizer classes used by IBM Granite models.
+
+Improves speed and efficiency in prompt preprocessing.
+
+6. fastapi & uvicorn (Optional for future backend support)
+fastapi
+Version: fastapi==0.111.0
+
+Purpose: Enables creation of REST APIs from Python code.
+
+Use Case: If you want to wrap your AI functions into an API for frontend integration.
+
+uvicorn
+Version: uvicorn==0.30.1
+
+Purpose: ASGI web server for running FastAPI apps.
+
+These are not required for Gradio deployment but useful if you're building a REST API interface.
+
 
